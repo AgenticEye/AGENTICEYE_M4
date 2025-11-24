@@ -1,56 +1,18 @@
-# ViralEdge Backend — Milestone 1
+# ViralEdge Engine — Milestone 2 (FULL)
 
-## 🚀 Overview
-FastAPI backend for the ViralEdge social media intelligence tool.
-Milestone 1 includes:
-- YouTube comments scraper
-- TikTok comments endpoint (placeholder)
-- Reddit full post scraper with nested comments
-- Reddit search pipeline
-- Health & root endpoints
+This repository contains Milestone 2 code for ViralEdge Engine — a local, free, multi-platform (YouTube + Reddit + Google Trends) analyzer.
 
----
+## Features (Milestone 2)
+- Fetch YouTube comments (scraped, no API key)
+- Extract questions, topics, sentiment
+- Simple Reddit cross-search for topics (public endpoints)
+- Google Trends check via `pytrends` (free)
+- Trend probability heuristic across platforms
+- FastAPI server exposing:
+  - `/youtube-comments?url=...`
+  - `/reddit-post?url=...`
+  - `/analyze?url=...`
 
-## 🔧 Running the server
-
-pip install -r requirements.txt
-uvicorn main:app --reload
-
----
-
-## 🔌 API Endpoints
-
-### Health Check
-GET /health
-
-### YouTube Comments
-GET /youtube-comments?url={video_url}
-
-### TikTok Comments
-GET /tiktok-comments?url={video_url}
-
-### Reddit Post
-GET /reddit-post?url={post_url}
-
-### Reddit Keyword Search (optional)
-GET /reddit-search?keyword={keyword}
-
----
-
-## 📁 Folder Structure
-viraledge-backend/
-├── main.py
-├── pipelines/
-│   ├── youtube.py
-│   ├── tiktok.py
-│   └── reddit_post.py
-├── utils/
-│   └── headers.py
-├── config.py
-├── requirements.txt
-└── README.md
-
----
-
-## ✔ Status
-Milestone 1 is complete and ready for review.
+## Install
+1. Create venv & install:
+# AgenticAI_m2
