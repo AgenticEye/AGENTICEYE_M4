@@ -16,3 +16,4 @@ This repository contains Milestone 2 code for ViralEdge Engine — a local, free
 ## Install
 1. Create venv & install:
 # AgenticAI_m2
+# AgenticAI_m3
