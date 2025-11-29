@@ -152,10 +152,10 @@ export default function Dashboard() {
             setResult(data);
 
             // 2. Deduct Credit (Only if analysis succeeded)
-            await fetch('/api/user/deduct', {
+            await fetch('/api/user', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ amount: 5, description: "Analyzed video content" })
+                body: JSON.stringify({ action: 'deduct', amount: 5, description: "Analyzed video content" })
             });
             setCredits(c => c - 5);
             fetchTransactions();
