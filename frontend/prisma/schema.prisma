@@ -1,0 +1,60 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  kindeId   String   @unique
+  email     String   @unique
+  credits   Int      @default(3)
+  tier      String   @default("Free") // Free, Diamond, Solitaire
+  videoGenerations Int @default(0) // Monthly allowance tracking
+  videoCredits     Int @default(0) // Purchasable/Rollover credits
+  lastResetDate DateTime @default(now())
+  createdAt DateTime @default(now())
+  analyses  Analysis[]
+  videoRequests VideoRequest[]
+  transactions CreditTransaction[]
+}
+
+model CreditTransaction {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  amount      Int      // Positive for add, negative for spend
+  creditType  String   // "IDEA" or "VIDEO"
+  type        String   // "PURCHASE", "USAGE", "BONUS", "REFUND"
+  description String
+  createdAt   DateTime @default(now())
+}
+
+model Analysis {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  videoUrl  String
+  result    String   // JSON string of the result
+  createdAt DateTime @default(now())
+}
+
+model VideoRequest {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  ideaTitle   String
+  ideaText    String?
+  notes       String?
+  preferences String   // JSON string: style, duration, voiceover, etc.
+  status      String   @default("Pending") // Pending, In Progress, Completed
+  downloadUrl String?
+  createdAt   DateTime @default(now())
+  completedAt DateTime?
+}
