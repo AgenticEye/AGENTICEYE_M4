@@ -1,9 +1,0 @@
-{
-    "functions": {
-        "api/py/index.py": {
-            "maxDuration": 60,
-            "memory": 1024,
-            "includeFiles": "py_lib/**"
-        }
-    }
-}
