@@ -17,6 +17,7 @@ import {
 import jsPDF from 'jspdf';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { loadStripe } from '@stripe/stripe-js';
 
@@ -37,11 +38,13 @@ import SettingsTab from '@/components/dashboard/SettingsTab';
 
 export default function Dashboard() {
     const { user } = useKindeBrowserClient();
+    const searchParams = useSearchParams();
     const [activeTab, setActiveTab] = useState<string>('youtube-insights');
     const [url, setUrl] = useState('');
     const [loading, setLoading] = useState(false);
     const [result, setResult] = useState<any>(null);
     const [credits, setCredits] = useState(0);
+    const [creditsLoaded, setCreditsLoaded] = useState(false);
     const [videoCredits, setVideoCredits] = useState(0);
     const [tier, setTier] = useState('Free');
     const [showUpgrade, setShowUpgrade] = useState(false);
@@ -63,21 +66,6 @@ export default function Dashboard() {
 
     const [transactions, setTransactions] = useState<any[]>([]);
 
-    useEffect(() => {
-        if (user) {
-            fetchCredits();
-            fetchHistory();
-            fetchVideoRequests();
-            fetchTransactions();
-
-            // Check for payment success
-            const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.get('payment') === 'success') {
-                verifyPayment(urlParams.get('session_id')!);
-            }
-        }
-    }, [user]);
-
     const fetchCredits = async () => {
         try {
             const res = await fetch('/api/user');
@@ -89,6 +77,8 @@ export default function Dashboard() {
             }
         } catch (error) {
             console.error("Failed to fetch credits", error);
+        } finally {
+            setCreditsLoaded(true);
         }
     };
 
@@ -141,7 +131,7 @@ export default function Dashboard() {
 
     const handleUpgrade = async (planName: string) => {
         setLoading(true);
-        const plans: any = {
+        const plans: Record<string, { priceId: string; credits: number }> = {
             'diamond': { priceId: 'price_1Qk...', credits: 100 }, // REPLACE WITH REAL ID
             'solitaire': { priceId: 'price_1QkSolitaire...', credits: 200 } // REPLACE WITH REAL ID
         };
@@ -244,6 +234,41 @@ export default function Dashboard() {
             setSubmittingRequest(false);
         }
     };
+
+    useEffect(() => {
+        if (user) {
+            fetchCredits();
+            fetchHistory();
+            fetchVideoRequests();
+            fetchTransactions();
+
+            // Check for payment success
+            if (searchParams.get('payment') === 'success') {
+                verifyPayment(searchParams.get('session_id')!);
+            }
+
+            // Set URL from params if present
+            const urlParam = searchParams.get('url');
+            if (urlParam) {
+                setUrl(urlParam);
+            }
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [user, searchParams]);
+
+    // Auto-analyze effect
+    useEffect(() => {
+        const urlParam = searchParams.get('url');
+        if (user && creditsLoaded && urlParam && !loading && !result) {
+            // Check if we have enough credits before auto-analyzing
+            if (credits >= 5) {
+                handleAnalyze();
+            } else {
+                setShowUpgrade(true);
+            }
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [user, creditsLoaded, credits, searchParams, loading, result]);
 
     return (
         <div className="flex h-screen bg-white text-gray-900 font-sans overflow-hidden">
@@ -392,7 +417,7 @@ export default function Dashboard() {
                                                 doc.text(`Viral Score: ${result.m3_generation.viral_prediction_engine.score}`, 10, 50);
                                                 doc.text(`Sentiment: ${result.m2_analysis.sentiment.positive}% Positive`, 10, 60);
                                                 doc.text("\nTop Questions:", 10, 70);
-                                                result.m2_analysis.questions.slice(0, 5).forEach((q: any, i: number) => {
+                                                result.m2_analysis.questions.slice(0, 5).forEach((q: { text: string }, i: number) => {
                                                     doc.text(`${i + 1}. ${q.text}`, 10, 80 + (i * 10));
                                                 });
 

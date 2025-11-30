@@ -58,7 +58,7 @@ export default function LandingPage() {
           {/* Interactive Input */}
           <form onSubmit={handleStart} className="max-w-xl mx-auto relative group">
             <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
-            <div className="relative flex items-center bg-black rounded-2xl p-2">
+            <div className="relative flex items-center bg-black rounded-2xl p-2 z-10">
               <Search className="w-6 h-6 text-gray-400 ml-4" />
               <input
                 type="text"
