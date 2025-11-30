@@ -167,7 +167,7 @@ export default function Dashboard() {
         try {
             const platform = activeTab === 'tiktok-insights' ? 'tiktok' : 'youtube';
             // 1. Analyze (Don't deduct yet)
-            const limit = deepAnalysis ? 500 : 100;
+            const limit = deepAnalysis ? 500 : 50;
             const res = await fetch(`/api/py/m3/analyze?url=${encodeURIComponent(url)}&tier=${tier}&platform=${platform}&limit=${limit}`);
             const data = await res.json();
             if (data.error) throw new Error(data.error);
