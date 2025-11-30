@@ -151,8 +151,8 @@ export default function Dashboard() {
                 }),
             });
             const { sessionId } = await res.json();
-            const stripe = await stripePromise; // Ensure stripePromise is imported or available
-            await stripe?.redirectToCheckout({ sessionId });
+            const stripe = await stripePromise;
+            await (stripe as any)?.redirectToCheckout({ sessionId });
         } catch (error) {
             console.error('Checkout failed:', error);
         } finally {
