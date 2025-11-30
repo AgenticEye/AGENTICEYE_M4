@@ -102,7 +102,7 @@ export default function LandingPage() {
             {/* Free Plan */}
             <div className="glass-card p-8 rounded-3xl border border-white/10 hover:border-white/30 transition-all flex flex-col">
               <h3 className="text-2xl font-bold mb-2">Free Tier</h3>
-              <p className="text-sm text-gray-400 mb-4">Spark Your Content Strategy</p>
+              <p className="text-sm text-gray-400 mb-4">Perfect for trying out the power of AI.</p>
               <div className="text-4xl font-black mb-6">$0<span className="text-lg text-gray-500 font-normal"> FREE</span></div>
 
               <ul className="mt-2 space-y-4 mb-8 flex-grow text-left">
@@ -124,7 +124,7 @@ export default function LandingPage() {
                 MOST POPULAR
               </div>
               <h3 className="text-2xl font-bold mb-2 text-cyan-400">Diamond Tier</h3>
-              <p className="text-sm text-gray-400 mb-4">Spark Your Content Strategy</p>
+              <p className="text-sm text-gray-400 mb-4">For serious creators ready to scale.</p>
               <div className="text-4xl font-black mb-2">$20<span className="text-lg text-gray-500 font-normal"> / month</span></div>
               <p className="text-xs text-gray-500 mb-6">Billed annually ($240/Year)</p>
 
@@ -145,7 +145,7 @@ export default function LandingPage() {
             {/* Solitaire Plan */}
             <div className="glass-card p-8 rounded-3xl border border-white/10 hover:border-white/30 transition-all flex flex-col">
               <h3 className="text-2xl font-bold mb-2 text-purple-400">Solitaire Tier</h3>
-              <p className="text-sm text-gray-400 mb-4">Spark Your Content Strategy</p>
+              <p className="text-sm text-gray-400 mb-4">Ultimate power for agencies and pros.</p>
               <div className="text-4xl font-black mb-2">$30<span className="text-lg text-gray-500 font-normal"> / month</span></div>
               <p className="text-xs text-gray-500 mb-6">Billed annually ($360/Year)</p>
 
