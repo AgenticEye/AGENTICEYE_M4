@@ -16,11 +16,11 @@ export default function AdminDashboard() {
 
     const fetchRequests = async () => {
         try {
-            const res = await fetch('/api/admin/requests');
+            const res = await fetch('/api/admin');
             const data = await res.json();
             if (data.requests) setRequests(data.requests);
-        } catch (e) {
-            console.error(e);
+        } catch (error) {
+            console.error("Failed to fetch requests", error);
         } finally {
             setLoading(false);
         }
@@ -34,7 +34,7 @@ export default function AdminDashboard() {
 
     const handleSave = async (id: string) => {
         try {
-            await fetch('/api/admin/requests/update', {
+            const res = await fetch('/api/admin', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -43,9 +43,14 @@ export default function AdminDashboard() {
                     downloadUrl: editUrl
                 })
             });
-            setEditingId(null);
-            fetchRequests();
-        } catch (e) {
+            const data = await res.json();
+            if (data.success) {
+                alert("Status updated!");
+                setEditingId(null);
+                fetchRequests();
+            }
+        } catch (error) {
+            console.error("Update failed", error);
             alert('Failed to update');
         }
     };
@@ -99,8 +104,8 @@ export default function AdminDashboard() {
                                             </select>
                                         ) : (
                                             <span className={`px-2 py-1 text-xs font-bold rounded-full ${req.status === 'Completed' ? 'bg-green-100 text-green-700' :
-                                                    req.status === 'In Progress' ? 'bg-blue-100 text-blue-700' :
-                                                        'bg-yellow-100 text-yellow-700'
+                                                req.status === 'In Progress' ? 'bg-blue-100 text-blue-700' :
+                                                    'bg-yellow-100 text-yellow-700'
                                                 }`}>
                                                 {req.status}
                                             </span>

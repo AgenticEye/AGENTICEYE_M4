@@ -104,7 +104,7 @@ export default function Dashboard() {
 
     const fetchVideoRequests = async () => {
         try {
-            const res = await fetch('/api/video-request/list');
+            const res = await fetch('/api/video-request');
             const data = await res.json();
             if (data.requests) setVideoRequests(data.requests);
         } catch (error) {
@@ -201,11 +201,8 @@ export default function Dashboard() {
         }
     };
 
-    const handleSubmitVideoRequest = async (scriptContent?: string) => {
-        if (!requestTitle) {
-            alert("Please enter a title for your video idea.");
-            return;
-        }
+    const handleSubmitVideoRequest = async () => {
+        if (!requestTitle) return;
         if (credits < 10) {
             alert("Insufficient Credits. Please upgrade or purchase more.");
             return;
@@ -213,31 +210,30 @@ export default function Dashboard() {
 
         setSubmittingRequest(true);
         try {
-            const res = await fetch('/api/video-request/create', {
+            const res = await fetch('/api/video-request', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    ideaTitle: requestTitle,
-                    ideaText: scriptContent || '', // Pass the generated script here
+                    title: requestTitle,
                     notes: requestNotes,
-                    preferences: {
-                        style: requestStyle,
-                        duration: requestDuration,
-                        tone: requestTone,
-                    }
+                    style: requestStyle,
+                    duration: requestDuration,
+                    tone: requestTone
                 })
             });
 
             const data = await res.json();
-            if (data.error) throw new Error(data.error);
-
-            alert("Video request submitted successfully!");
-            setRequestTitle('');
-            setRequestNotes('');
-            fetchVideoRequests();
-            fetchCredits(); // Update balance
-        } catch (error: any) {
-            alert(error.message || "Failed to submit request");
+            if (data.success) {
+                alert("Request Submitted! We will notify you when it's ready.");
+                setRequestTitle('');
+                setRequestNotes('');
+                fetchVideoRequests();
+                fetchCredits();
+            } else {
+                alert(data.error || "Failed to submit request");
+            }
+        } catch (error) {
+            console.error("Request failed", error);
         } finally {
             setSubmittingRequest(false);
         }
