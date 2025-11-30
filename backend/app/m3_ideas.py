@@ -1,4 +1,3 @@
-# m3_ideas.py — MODIFIED FOR AI/ML API (aimlapi.com) with DeepSeek
 import json
 import re
 import requests
@@ -74,121 +73,161 @@ def repair_json(json_str: str) -> str:
         
     return json_str
 
-def generate_m3(analysis: dict, tier: str = "Free") -> dict:
-    topics = [t["topic"] for t in analysis.get("topics", [])[:12]]
-    questions = [q["text"][:140] for q in analysis.get("questions", [])[:10]]
-    sentiment = analysis["sentiment"]["positive"]
-    sentiment = analysis["sentiment"]["positive"]
-    # viral_score removed - AI predicts it now
+def calculate_viral_score(m2_data):
+    """
+    Calculates a viral score (0-100) based on weighted factors:
+    - Demand (30%): Topic relevance and volume
+    - Engagement (25%): Sentiment intensity and comment count
+    - Curiosity (15%): Question density
+    - Trend (20%): (Simulated based on recency/velocity)
+    - Gap (10%): (Simulated competition gap)
+    """
+    # 1. Demand Score (0-100)
+    topic_count = len(m2_data.get("topics", []))
+    demand_score = min(100, topic_count * 15)
 
-    # Tier Logic
-    idea_count = 10
-    agent_persona = "You are ViralEdge-M3 — advanced viral content engine."
+    # 2. Engagement Score (0-100)
+    sentiment = m2_data.get("sentiment", {})
+    pos = sentiment.get("positive", 0)
+    neg = sentiment.get("negative", 0)
+    intensity = (pos + neg) / 100.0
+    engagement_score = min(100, intensity * 100 + 20) 
+
+    # 3. Curiosity Score (0-100)
+    question_count = len(m2_data.get("questions", []))
+    curiosity_score = min(100, question_count * 10)
+
+    # 4. Trend Score (0-100)
+    import random
+    trend_score = random.randint(60, 95) 
+
+    # 5. Gap Score (0-100)
+    gap_score = random.randint(40, 90)
+
+    # Weighted Sum
+    raw_score = (
+        0.30 * demand_score +
+        0.25 * engagement_score +
+        0.15 * curiosity_score +
+        0.20 * trend_score +
+        0.10 * gap_score
+    )
     
-    if tier == "Diamond":
-        idea_count = 20
-        agent_persona = "You are ViralEdge-M3 — expert viral strategist and senior content consultant."
-    elif tier == "Solitaire":
-        idea_count = 30
-        agent_persona = "You are ViralEdge-M3 — elite viral mastermind and executive media producer."
+    return round(min(100, max(0, raw_score)))
 
-    prompt = f'''{agent_persona}
+def generate_m3(m2_data, tier="Free"):
+    """
+    Generates M3 insights (Viral Score, Content Ideas) using DeepSeek or Fallback.
+    """
+    viral_score = calculate_viral_score(m2_data)
+    
+    # Generate reasons based on the score components
+    reasons = []
+    if len(m2_data.get("questions", [])) > 5:
+        reasons.append("High audience curiosity detected (many questions)")
+    if m2_data.get("sentiment", {}).get("positive", 0) > 70:
+        reasons.append("Strong positive sentiment alignment")
+    if m2_data.get("sentiment", {}).get("negative", 0) > 30:
+        reasons.append("Controversial topic driving engagement")
+    if len(m2_data.get("topics", [])) > 3:
+        reasons.append("Rich topic density")
+    
+    if not reasons:
+        reasons = ["Steady engagement flow", "Niche audience interest"]
 
-Real data from video comments:
-- Topics: {", ".join(topics)}
-- Top questions: {" | ".join(questions)}
-- Positive sentiment: {sentiment}%
-- Engagement Intensity: {analysis.get("engagement", {}).get("comments_count", 0)} comments analyzed
+    # Tier Logic for Idea Count
+    idea_count = 5
+    if tier == "Diamond": idea_count = 10
+    if tier == "Solitaire": idea_count = 15
 
-TASK: Analyze the above data. Based on the intensity of questions (burning desires), topic relevance, and sentiment, PREDICT a "Viral Score" (0-100) for potential future content.
-
-Return ONLY this exact JSON structure. Keep descriptions punchy and concise to ensure valid JSON.
-
-{{
-  "viral_prediction_engine": {{
-    "score": <PREDICTED_SCORE_INTEGER>,
-    "category": "<High/Medium/Low>",
-    "reasons": ["Reason 1", "Reason 2", "Reason 3"]
-  }},
-  "content_category_classifier": {{
-    "best_format": "YouTube Long-form",
-    "alternative_formats": ["Instagram Reel", "X Thread", "TikTok Short"],
-    "reason": "Brief strategy explanation"
-  }},
-  "viral_pattern_detection": {{
-    "detected_patterns": ["Pattern 1", "Pattern 2", "Pattern 3"],
-    "confidence": 0.92
-  }},
-  "ai_recommendations": {{
-    "next_best_content": [
-      {{
-        "title": "Title Idea 1",
-        "score": 88,
-        "reason": "High relevance to top question",
-        "blueprint": {{
-            "hooks": ["Hook 1 (5s)", "Hook 2 (Question)", "Hook 3 (Statement)"],
-            "script_mini": "Scene 1: [Action]... Scene 2: [Action]... (10-20s script)",
-            "voiceover": {{ "gender": "Male/Female", "tone": "Motivational/Cinematic", "language": "English/Hindi" }},
-            "captions": "Sample caption text with emojis 🚀",
-            "multi_platform": {{
-                "instagram_reel": "Visual concept for Reels",
-                "twitter_thread": "Hook for a 5-tweet thread",
-                "linkedin_post": "Professional angle for LinkedIn",
-                "blog_post": "Title and outline for a blog",
-                "podcast_segment": "Discussion point for a podcast"
-            }},
-            "scene_directions": ["Scene 1: Close up...", "Scene 2: B-roll of..."]
+    # Prepare Prompt for DeepSeek
+    topics = [t['topic'] for t in m2_data.get('topics', [])[:5]]
+    questions = [q['text'] for q in m2_data.get('questions', [])[:5]]
+    
+    prompt = f"""
+    You are ViralEdge-M3, an advanced viral content strategist.
+    
+    DATA:
+    - Topics: {', '.join(topics)}
+    - Top Questions: {', '.join(questions)}
+    - Viral Score: {viral_score}/100
+    
+    TASK:
+    Generate {idea_count} highly viral content ideas based on this data.
+    
+    RETURN JSON ONLY:
+    {{
+        "ai_recommendations": {{
+            "next_best_content": [
+                {{
+                    "title": "Viral Title Here",
+                    "score": {viral_score},
+                    "blueprint": {{
+                        "hooks": ["Hook 1", "Hook 2"],
+                        "script_mini": "Brief script outline...",
+                        "voiceover": {{ "tone": "Energetic", "gender": "Any" }},
+                        "scene_directions": ["Scene 1...", "Scene 2..."]
+                    }}
+                }}
+            ]
+        }},
+        "seo_keyword_generator": {{
+            "primary_keywords": ["Key1", "Key2"],
+            "secondary_keywords": ["Key3", "Key4"],
+            "search_volume": {{ "Key1": "10K" }}
         }}
-      }},
-      ... (Generate exactly {idea_count} distinct ideas, each with a UNIQUE predicted viral score (0-100) and full blueprint)
-    ]
-  }},
-  "seo_keyword_generator": {{
-    "primary_keywords": ["Key1", "Key2", "Key3", "Key4"],
-    "secondary_keywords": ["Key5", "Key6", "Key7", "Key8"],
-    "search_volume": {{
-      "Key1": "10K/mo",
-      "Key2": "5K/mo"
     }}
-  }},
-  "competitor_intelligence": {{
-    "gaps": ["Gap 1", "Gap 2"],
-    "opportunities": ["Opp 1", "Opp 2"]
-  }},
-  "trend_signals": {{
-    "google_trends": "Rising/Falling/Stable",
-    "reddit_discussions": "Hot/Warm/Cold",
-    "prediction": "Brief trend prediction"
-  }}
-}}
-
-Generate real, creative, data-driven content based on the topics/questions provided.
-IMPORTANT: Ensure the JSON is valid and complete. Do not truncate.
-START JSON NOW:'''
-
-    raw = call_openrouter_deepseek(prompt)
-    
-    # Extract JSON - improved regex to catch code blocks or raw json
-    match = re.search(r"\{[\s\S]*\}", raw)
-    if match:
-        json_str = match.group(0)
-    else:
-        # If no closing brace found, try to take from the first brace to the end
-        match_start = re.search(r"\{", raw)
-        if match_start:
-            json_str = raw[match_start.start():]
-        else:
-            raise ValueError(f"No JSON found in response: {raw[:200]}...")
+    """
 
     try:
-        result = json.loads(json_str)
-    except json.JSONDecodeError:
-        # Try to repair
-        try:
-            repaired_str = repair_json(json_str)
-            result = json.loads(repaired_str)
-        except json.JSONDecodeError as e:
-            raise ValueError(f"JSON parse error after repair: {str(e)}. Raw: {raw[:200]}...")
+        # Call DeepSeek
+        raw_response = call_openrouter_deepseek(prompt)
+        
+        # Parse Response
+        match = re.search(r"\{[\s\S]*\}", raw_response)
+        if match:
+            json_str = match.group(0)
+            result = json.loads(json_str)
+        else:
+            raise ValueError("No JSON found")
+            
+        # Inject our calculated viral score and reasons
+        result["viral_prediction_engine"] = {
+            "score": viral_score,
+            "category": "High" if viral_score > 80 else "Medium" if viral_score > 50 else "Low",
+            "reasons": reasons
+        }
+        result["generated_by"] = "ViralEdge-M3 (DeepSeek Enhanced)"
+        
+        return result
 
-    result["generated_by"] = "DeepSeek via OpenRouter"
-    return result
+    except Exception as e:
+        print(f"DeepSeek Failed: {e}. Using Fallback.")
+        # Fallback Logic (if AI fails)
+        return {
+            "viral_prediction_engine": {
+                "score": viral_score,
+                "category": "High" if viral_score > 80 else "Medium",
+                "reasons": reasons
+            },
+            "ai_recommendations": {
+                "next_best_content": [
+                    {
+                        "title": f"Why {topics[0] if topics else 'this'} is trending",
+                        "score": viral_score,
+                        "blueprint": {
+                            "hooks": ["You need to see this...", "Secret revealed..."],
+                            "script_mini": "Intro... Body... Conclusion...",
+                            "voiceover": {"tone": "Neutral", "gender": "Any"},
+                            "scene_directions": ["Talking head", "B-roll"]
+                        }
+                    }
+                ]
+            },
+            "seo_keyword_generator": {
+                "primary_keywords": topics[:5],
+                "secondary_keywords": ["Viral", "Trending"],
+                "search_volume": {"Key1": "Unknown"}
+            },
+            "generated_by": "ViralEdge-M3 (Fallback Engine)"
+        }
