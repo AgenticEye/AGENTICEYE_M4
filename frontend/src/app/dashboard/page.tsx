@@ -139,8 +139,14 @@ export default function Dashboard() {
         }
     };
 
-    const handleUpgrade = async (plan: any) => {
+    const handleUpgrade = async (planName: string) => {
         setLoading(true);
+        const plans: any = {
+            'diamond': { priceId: 'price_1Qk...', credits: 100 }, // REPLACE WITH REAL ID
+            'solitaire': { priceId: 'price_1QkSolitaire...', credits: 200 } // REPLACE WITH REAL ID
+        };
+        const plan = plans[planName];
+
         try {
             const res = await fetch('/api/stripe', {
                 method: 'POST',

@@ -1,7 +1,35 @@
-import Link from 'next/link';
-import { Check, Zap } from 'lucide-react';
+"use client";
+
+import { useState } from 'react';
+import { loadStripe } from '@stripe/stripe-js';
+import { Loader2 } from 'lucide-react';
+
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 
 export default function PricingPage() {
+    const [loading, setLoading] = useState<string | null>(null);
+
+    const handleUpgrade = async (priceId: string, credits: number) => {
+        setLoading(priceId);
+        try {
+            const res = await fetch('/api/stripe', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ priceId, credits }),
+            });
+            const { sessionId } = await res.json();
+            const stripe = await stripePromise;
+            if (stripe) {
+                await (stripe as any).redirectToCheckout({ sessionId });
+            }
+        } catch (error) {
+            console.error("Checkout failed:", error);
+            alert("Checkout failed. Please try again.");
+        } finally {
+            setLoading(null);
+        }
+    };
+
     return (
         <div className="min-h-screen bg-[#0f0c29] text-white flex flex-col items-center py-20 px-4">
             <div className="text-center mb-16">
@@ -26,12 +54,12 @@ export default function PricingPage() {
                         <li className="flex items-center gap-3 text-gray-500">✕ NO Video Generations</li>
                     </ul>
 
-                    <Link href="/api/auth/register" className="block w-full py-3 rounded-xl border border-white/20 text-center font-bold hover:bg-white/10 transition-all">
-                        Start Free
-                    </Link>
+                    <button className="block w-full py-3 rounded-xl border border-white/20 text-center font-bold hover:bg-white/10 transition-all cursor-not-allowed opacity-50">
+                        Current Plan
+                    </button>
                 </div>
 
-                {/* Diamond Plan (Highlighted) */}
+                {/* Diamond Plan */}
                 <div className="relative glass-card p-8 rounded-3xl border-2 border-pink-500 transform scale-105 shadow-[0_0_40px_rgba(255,0,153,0.3)] flex flex-col">
                     <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-primary px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
                         Most Popular
@@ -43,16 +71,20 @@ export default function PricingPage() {
 
                     <ul className="mt-2 space-y-4 mb-8 flex-grow text-left">
                         <li className="flex items-center gap-3 text-white">✓ 20 Ideas to get you started</li>
-                        <li className="flex items-center gap-3 text-white">✓ 100 Credits/month or 1750 Credits/year</li>
+                        <li className="flex items-center gap-3 text-white">✓ 100 Credits/month</li>
                         <li className="flex items-center gap-3 text-white">✓ Half Access to History and Viral Scores</li>
                         <li className="flex items-center gap-3 text-white">✓ Medium-level AI Agents</li>
                         <li className="flex items-center gap-3 text-white">✓ x3 FREE Video Generations a Month</li>
-                        <li className="flex items-center gap-3 text-gray-500">✕ No AI Content Ideas Reports</li>
                     </ul>
 
-                    <Link href="/api/auth/register" className="block w-full py-3 rounded-xl bg-gradient-primary text-center font-bold hover:shadow-[0_0_20px_rgba(0,242,255,0.5)] transition-all">
+                    <button
+                        onClick={() => handleUpgrade('price_1Qk...', 100)} // REPLACE WITH REAL PRICE ID
+                        disabled={loading === 'price_1Qk...'}
+                        className="block w-full py-3 rounded-xl bg-gradient-primary text-center font-bold hover:shadow-[0_0_20px_rgba(0,242,255,0.5)] transition-all flex items-center justify-center gap-2"
+                    >
+                        {loading === 'price_1Qk...' && <Loader2 className="w-4 h-4 animate-spin" />}
                         Upgrade Now
-                    </Link>
+                    </button>
                 </div>
 
                 {/* Solitaire Plan */}
@@ -64,16 +96,20 @@ export default function PricingPage() {
 
                     <ul className="mt-2 space-y-4 mb-8 flex-grow text-left">
                         <li className="flex items-center gap-3 text-gray-300">✓ 30 Ideas to get you started</li>
-                        <li className="flex items-center gap-3 text-gray-300">✓ 200 Credits/month or 3000 Credits/year</li>
+                        <li className="flex items-center gap-3 text-gray-300">✓ 200 Credits/month</li>
                         <li className="flex items-center gap-3 text-gray-300">✓ Full Access to History and Viral Scores</li>
-                        <li className="flex items-center gap-3 text-gray-300">✓ High-level AI Agents and Report generation</li>
+                        <li className="flex items-center gap-3 text-gray-300">✓ High-level AI Agents</li>
                         <li className="flex items-center gap-3 text-gray-300">✓ x5 FREE Video Generations a Month</li>
-                        <li className="flex items-center gap-3 text-gray-300">✓ Priority support</li>
                     </ul>
 
-                    <Link href="/api/auth/register" className="block w-full py-3 rounded-xl border border-white/20 text-center font-bold hover:bg-white/10 transition-all">
+                    <button
+                        onClick={() => handleUpgrade('price_1QkSolitaire...', 200)} // REPLACE WITH REAL PRICE ID
+                        disabled={loading === 'price_1QkSolitaire...'}
+                        className="block w-full py-3 rounded-xl border border-white/20 text-center font-bold hover:bg-white/10 transition-all flex items-center justify-center gap-2"
+                    >
+                        {loading === 'price_1QkSolitaire...' && <Loader2 className="w-4 h-4 animate-spin" />}
                         Go Solitaire
-                    </Link>
+                    </button>
                 </div>
             </div>
         </div>
