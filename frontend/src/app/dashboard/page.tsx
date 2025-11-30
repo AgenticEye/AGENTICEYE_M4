@@ -132,8 +132,8 @@ export default function Dashboard() {
     const handleUpgrade = async (planName: string) => {
         setLoading(true);
         const plans: Record<string, { priceId: string; credits: number }> = {
-            'diamond': { priceId: 'price_1Qk...', credits: 100 }, // REPLACE WITH REAL ID
-            'solitaire': { priceId: 'price_1QkSolitaire...', credits: 200 } // REPLACE WITH REAL ID
+            'diamond': { priceId: 'price_1PzqMvB3wQ42xPbWvyd03B2J', credits: 100 },
+            'solitaire': { priceId: 'price_1PzqP2B3wQ42xPbWs6kZWlh9', credits: 200 }
         };
         const plan = plans[planName];
 

@@ -78,11 +78,11 @@ export default function PricingPage() {
                     </ul>
 
                     <button
-                        onClick={() => handleUpgrade('price_1Qk...', 100)} // REPLACE WITH REAL PRICE ID
-                        disabled={loading === 'price_1Qk...'}
+                        onClick={() => handleUpgrade('price_1PzqMvB3wQ42xPbWvyd03B2J', 100)}
+                        disabled={loading === 'price_1PzqMvB3wQ42xPbWvyd03B2J'}
                         className="block w-full py-3 rounded-xl bg-gradient-primary text-center font-bold hover:shadow-[0_0_20px_rgba(0,242,255,0.5)] transition-all flex items-center justify-center gap-2"
                     >
-                        {loading === 'price_1Qk...' && <Loader2 className="w-4 h-4 animate-spin" />}
+                        {loading === 'price_1PzqMvB3wQ42xPbWvyd03B2J' && <Loader2 className="w-4 h-4 animate-spin" />}
                         Upgrade Now
                     </button>
                 </div>
@@ -103,11 +103,11 @@ export default function PricingPage() {
                     </ul>
 
                     <button
-                        onClick={() => handleUpgrade('price_1QkSolitaire...', 200)} // REPLACE WITH REAL PRICE ID
-                        disabled={loading === 'price_1QkSolitaire...'}
+                        onClick={() => handleUpgrade('price_1PzqP2B3wQ42xPbWs6kZWlh9', 200)}
+                        disabled={loading === 'price_1PzqP2B3wQ42xPbWs6kZWlh9'}
                         className="block w-full py-3 rounded-xl border border-white/20 text-center font-bold hover:bg-white/10 transition-all flex items-center justify-center gap-2"
                     >
-                        {loading === 'price_1QkSolitaire...' && <Loader2 className="w-4 h-4 animate-spin" />}
+                        {loading === 'price_1PzqP2B3wQ42xPbWs6kZWlh9' && <Loader2 className="w-4 h-4 animate-spin" />}
                         Go Solitaire
                     </button>
                 </div>
