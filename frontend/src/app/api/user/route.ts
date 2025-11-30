@@ -15,7 +15,7 @@ export async function GET(req: Request) {
     const type = searchParams.get('type'); // 'credits' or 'transactions'
 
     // Get or create user in DB
-    let dbUser = await prisma.user.findUnique({
+    let dbUser: any = await prisma.user.findUnique({
         where: { kindeId: user.id },
         include: {
             transactions: type === 'transactions' ? { orderBy: { createdAt: 'desc' } } : false
@@ -27,9 +27,10 @@ export async function GET(req: Request) {
             data: {
                 kindeId: user.id,
                 email: user.email || "",
-            },
-            include: { transactions: false }
+            }
         });
+        // New user has no transactions
+        dbUser.transactions = [];
     }
 
     if (type === 'transactions') {
