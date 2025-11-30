@@ -158,7 +158,7 @@ export default function Dashboard() {
 
     const handleAnalyze = async () => {
         if (!url) return;
-        if (credits < 5) {
+        if (credits < 1) {
             setShowUpgrade(true);
             return;
         }
@@ -178,9 +178,9 @@ export default function Dashboard() {
             await fetch('/api/user', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ action: 'deduct', amount: 5, description: "Analyzed video content" })
+                body: JSON.stringify({ action: 'deduct', amount: 1, description: "Analyzed video content" })
             });
-            setCredits(c => c - 5);
+            setCredits(c => c - 1);
             fetchTransactions();
 
             // 3. Save to History
@@ -261,7 +261,7 @@ export default function Dashboard() {
         const urlParam = searchParams.get('url');
         if (user && creditsLoaded && urlParam && !loading && !result) {
             // Check if we have enough credits before auto-analyzing
-            if (credits >= 5) {
+            if (credits >= 1) {
                 handleAnalyze();
             } else {
                 setShowUpgrade(true);
