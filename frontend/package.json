@@ -12,6 +12,8 @@
   "dependencies": {
     "@kinde-oss/kinde-auth-nextjs": "^2.11.0",
     "@prisma/client": "^5.10.2",
+    "@stripe/stripe-js": "^8.5.3",
+    "better-sqlite3": "^12.5.0",
     "clsx": "^2.1.1",
     "framer-motion": "^12.23.24",
     "jspdf": "^3.0.4",

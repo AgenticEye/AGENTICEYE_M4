@@ -18,6 +18,9 @@ import jsPDF from 'jspdf';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import Link from 'next/link';
+import { loadStripe } from '@stripe/stripe-js';
+
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 
 // Components
 import SidebarItem from '@/components/dashboard/SidebarItem';
@@ -76,60 +79,84 @@ export default function Dashboard() {
     }, [user]);
 
     const fetchCredits = async () => {
-        const res = await fetch('/api/user/credits');
-        const data = await res.json();
-        if (data.credits !== undefined) {
-            setCredits(data.credits);
-            setTier(data.tier);
-            if (data.videoCredits !== undefined) setVideoCredits(data.videoCredits);
+        try {
+            const res = await fetch('/api/user');
+            const data = await res.json();
+            if (data.credits !== undefined) {
+                setCredits(data.credits);
+                setTier(data.tier);
+                if (data.videoCredits !== undefined) setVideoCredits(data.videoCredits);
+            }
+        } catch (error) {
+            console.error("Failed to fetch credits", error);
         }
     };
 
     const fetchHistory = async () => {
-        const res = await fetch('/api/history');
-        const data = await res.json();
-        if (data.history) setHistory(data.history);
+        try {
+            const res = await fetch('/api/history');
+            const data = await res.json();
+            if (data.history) setHistory(data.history);
+        } catch (error) {
+            console.error("Failed to fetch history", error);
+        }
     };
 
     const fetchVideoRequests = async () => {
-        const res = await fetch('/api/video-request/list');
-        const data = await res.json();
-        if (data.requests) setVideoRequests(data.requests);
+        try {
+            const res = await fetch('/api/video-request/list');
+            const data = await res.json();
+            if (data.requests) setVideoRequests(data.requests);
+        } catch (error) {
+            console.error("Failed to fetch video requests", error);
+        }
     };
 
     const fetchTransactions = async () => {
-        const res = await fetch('/api/user/transactions');
-        const data = await res.json();
-        if (data.transactions) setTransactions(data.transactions);
+        try {
+            const res = await fetch('/api/user?type=transactions');
+            const data = await res.json();
+            if (data.transactions) {
+                setTransactions(data.transactions);
+            }
+        } catch (error) {
+            console.error("Failed to fetch transactions", error);
+        }
     };
 
     const verifyPayment = async (sessionId: string) => {
         try {
-            await fetch('/api/stripe/verify', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ sessionId }),
-            });
-            alert("🎉 Payment Successful! Credits Added.");
-            fetchCredits();
-            fetchTransactions();
-            window.history.replaceState({}, document.title, "/dashboard");
+            const res = await fetch(`/api/stripe?session_id=${sessionId}`);
+            const data = await res.json();
+            if (data.status === 'paid') {
+                alert("🎉 Payment Successful! Credits Added.");
+                fetchCredits();
+                fetchTransactions();
+                window.history.replaceState({}, document.title, "/dashboard");
+            }
         } catch (e) {
             console.error("Payment verification failed", e);
         }
     };
 
-    const handleUpgrade = async (targetPlan: string = 'diamond') => {
+    const handleUpgrade = async (plan: any) => {
+        setLoading(true);
         try {
-            const res = await fetch('/api/stripe/checkout', {
+            const res = await fetch('/api/stripe', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ priceId: targetPlan }),
+                body: JSON.stringify({
+                    priceId: plan.priceId,
+                    credits: plan.credits
+                }),
             });
-            const data = await res.json();
-            if (data.url) window.location.href = data.url;
-        } catch (e) {
-            console.error("Upgrade error", e);
+            const { sessionId } = await res.json();
+            const stripe = await stripePromise; // Ensure stripePromise is imported or available
+            await stripe?.redirectToCheckout({ sessionId });
+        } catch (error) {
+            console.error('Checkout failed:', error);
+        } finally {
+            setLoading(false);
         }
     };
 
