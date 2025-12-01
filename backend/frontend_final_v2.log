@@ -1,0 +1,32 @@
+
+> dev
+> npm run dev --prefix frontend
+
+
+> frontend@0.1.0 dev
+> next dev
+
+ ⚠ `eslint` configuration in next.config.ts is no longer supported. See more info here: https://nextjs.org/docs/app/api-reference/cli/next#next-lint-options
+ ⚠ Invalid next.config.ts options detected: 
+ ⚠     Unrecognized key(s) in object: 'eslint'
+ ⚠ See more info here: https://nextjs.org/docs/messages/invalid-next-config
+ ⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of /home/tdd/FIRST CLIENT/viraledge-backend/package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * /home/tdd/FIRST CLIENT/viraledge-backend/frontend/package-lock.json
+
+   ▲ Next.js 16.0.6 (Turbopack)
+   - Local:         http://localhost:3000
+   - Network:       http://192.168.1.20:3000
+   - Environments: .env
+
+ ✓ Starting...
+ ✓ Ready in 574ms
+ GET /dashboard 404 in 1152ms (compile: 1007ms, render: 145ms)
+ GET /dashboard 404 in 119ms (compile: 27ms, render: 92ms)
+ GET /dashboard 404 in 50ms (compile: 4ms, render: 46ms)
+ GET /dashboard 404 in 40ms (compile: 3ms, render: 38ms)
+ GET /dashboard 404 in 19ms (compile: 4ms, render: 15ms)
+ GET /dashboard 404 in 34ms (compile: 3ms, render: 31ms)

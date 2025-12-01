@@ -1,0 +1,68 @@
+
+> dev
+> npm run dev --prefix frontend
+
+
+> frontend@0.1.0 dev
+> next dev
+
+ ⚠ `eslint` configuration in next.config.ts is no longer supported. See more info here: https://nextjs.org/docs/app/api-reference/cli/next#next-lint-options
+ ⚠ Invalid next.config.ts options detected: 
+ ⚠     Unrecognized key(s) in object: 'eslint'
+ ⚠ See more info here: https://nextjs.org/docs/messages/invalid-next-config
+ ⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of /home/tdd/FIRST CLIENT/viraledge-backend/package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * /home/tdd/FIRST CLIENT/viraledge-backend/frontend/package-lock.json
+
+   ▲ Next.js 16.0.6 (Turbopack)
+   - Local:         http://localhost:3000
+   - Network:       http://192.168.1.20:3000
+   - Environments: .env
+
+ ✓ Starting...
+ ✓ Ready in 1702ms
+ ○ Compiling /dashboard ...
+prisma:query INSERT INTO "public"."User" ("id","email","firstName","lastName","credits","tier","createdAt","updatedAt") VALUES ($1,$2,$3,$4,$5,CAST($6::text AS "public"."Tier"),$7,$8) ON CONFLICT ("email") DO UPDATE SET "firstName" = $9, "lastName" = $10, "updatedAt" = $11 WHERE ("public"."User"."email" = $12 AND 1=1) RETURNING "public"."User"."id", "public"."User"."email", "public"."User"."firstName", "public"."User"."lastName", "public"."User"."credits", "public"."User"."tier"::text, "public"."User"."createdAt", "public"."User"."updatedAt"
+prisma:query SELECT "public"."Analysis"."id", "public"."Analysis"."userId", "public"."Analysis"."url", "public"."Analysis"."videoId", "public"."Analysis"."title", "public"."Analysis"."thumbnail", "public"."Analysis"."viralScore", "public"."Analysis"."resultJson", "public"."Analysis"."createdAt" FROM "public"."Analysis" WHERE "public"."Analysis"."userId" = $1 ORDER BY "public"."Analysis"."createdAt" DESC LIMIT $2 OFFSET $3
+prisma:query SELECT COUNT(*) FROM (SELECT "public"."Analysis"."id" FROM "public"."Analysis" WHERE "public"."Analysis"."userId" = $1 OFFSET $2) AS "sub"
+prisma:query SELECT AVG("viralScore") FROM (SELECT "public"."Analysis"."viralScore" FROM "public"."Analysis" WHERE "public"."Analysis"."userId" = $1 OFFSET $2) AS "sub"
+ GET /dashboard 200 in 13.0s (compile: 7.7s, render: 5.4s)
+prisma:query INSERT INTO "public"."User" ("id","email","firstName","lastName","credits","tier","createdAt","updatedAt") VALUES ($1,$2,$3,$4,$5,CAST($6::text AS "public"."Tier"),$7,$8) ON CONFLICT ("email") DO UPDATE SET "firstName" = $9, "lastName" = $10, "updatedAt" = $11 WHERE ("public"."User"."email" = $12 AND 1=1) RETURNING "public"."User"."id", "public"."User"."email", "public"."User"."firstName", "public"."User"."lastName", "public"."User"."credits", "public"."User"."tier"::text, "public"."User"."createdAt", "public"."User"."updatedAt"
+prisma:query SELECT "public"."Analysis"."id", "public"."Analysis"."userId", "public"."Analysis"."url", "public"."Analysis"."videoId", "public"."Analysis"."title", "public"."Analysis"."thumbnail", "public"."Analysis"."viralScore", "public"."Analysis"."resultJson", "public"."Analysis"."createdAt" FROM "public"."Analysis" WHERE "public"."Analysis"."userId" = $1 ORDER BY "public"."Analysis"."createdAt" DESC LIMIT $2 OFFSET $3
+prisma:query SELECT COUNT(*) FROM (SELECT "public"."Analysis"."id" FROM "public"."Analysis" WHERE "public"."Analysis"."userId" = $1 OFFSET $2) AS "sub"
+prisma:query SELECT AVG("viralScore") FROM (SELECT "public"."Analysis"."viralScore" FROM "public"."Analysis" WHERE "public"."Analysis"."userId" = $1 OFFSET $2) AS "sub"
+ GET /dashboard 200 in 1111ms (compile: 11ms, render: 1100ms)
+prisma:query INSERT INTO "public"."User" ("id","email","firstName","lastName","credits","tier","createdAt","updatedAt") VALUES ($1,$2,$3,$4,$5,CAST($6::text AS "public"."Tier"),$7,$8) ON CONFLICT ("email") DO UPDATE SET "firstName" = $9, "lastName" = $10, "updatedAt" = $11 WHERE ("public"."User"."email" = $12 AND 1=1) RETURNING "public"."User"."id", "public"."User"."email", "public"."User"."firstName", "public"."User"."lastName", "public"."User"."credits", "public"."User"."tier"::text, "public"."User"."createdAt", "public"."User"."updatedAt"
+prisma:query SELECT "public"."Analysis"."id", "public"."Analysis"."userId", "public"."Analysis"."url", "public"."Analysis"."videoId", "public"."Analysis"."title", "public"."Analysis"."thumbnail", "public"."Analysis"."viralScore", "public"."Analysis"."resultJson", "public"."Analysis"."createdAt" FROM "public"."Analysis" WHERE "public"."Analysis"."userId" = $1 ORDER BY "public"."Analysis"."createdAt" DESC LIMIT $2 OFFSET $3
+prisma:query SELECT COUNT(*) FROM (SELECT "public"."Analysis"."id" FROM "public"."Analysis" WHERE "public"."Analysis"."userId" = $1 OFFSET $2) AS "sub"
+prisma:query SELECT AVG("viralScore") FROM (SELECT "public"."Analysis"."viralScore" FROM "public"."Analysis" WHERE "public"."Analysis"."userId" = $1 OFFSET $2) AS "sub"
+ GET /dashboard 200 in 1135ms (compile: 7ms, render: 1128ms)
+prisma:query INSERT INTO "public"."User" ("id","email","firstName","lastName","credits","tier","createdAt","updatedAt") VALUES ($1,$2,$3,$4,$5,CAST($6::text AS "public"."Tier"),$7,$8) ON CONFLICT ("email") DO UPDATE SET "firstName" = $9, "lastName" = $10, "updatedAt" = $11 WHERE ("public"."User"."email" = $12 AND 1=1) RETURNING "public"."User"."id", "public"."User"."email", "public"."User"."firstName", "public"."User"."lastName", "public"."User"."credits", "public"."User"."tier"::text, "public"."User"."createdAt", "public"."User"."updatedAt"
+prisma:query SELECT "public"."Analysis"."id", "public"."Analysis"."userId", "public"."Analysis"."url", "public"."Analysis"."videoId", "public"."Analysis"."title", "public"."Analysis"."thumbnail", "public"."Analysis"."viralScore", "public"."Analysis"."resultJson", "public"."Analysis"."createdAt" FROM "public"."Analysis" WHERE "public"."Analysis"."userId" = $1 ORDER BY "public"."Analysis"."createdAt" DESC LIMIT $2 OFFSET $3
+prisma:query SELECT COUNT(*) FROM (SELECT "public"."Analysis"."id" FROM "public"."Analysis" WHERE "public"."Analysis"."userId" = $1 OFFSET $2) AS "sub"
+prisma:query SELECT AVG("viralScore") FROM (SELECT "public"."Analysis"."viralScore" FROM "public"."Analysis" WHERE "public"."Analysis"."userId" = $1 OFFSET $2) AS "sub"
+ GET /dashboard 200 in 1226ms (compile: 5ms, render: 1221ms)
+prisma:query INSERT INTO "public"."User" ("id","email","firstName","lastName","credits","tier","createdAt","updatedAt") VALUES ($1,$2,$3,$4,$5,CAST($6::text AS "public"."Tier"),$7,$8) ON CONFLICT ("email") DO UPDATE SET "firstName" = $9, "lastName" = $10, "updatedAt" = $11 WHERE ("public"."User"."email" = $12 AND 1=1) RETURNING "public"."User"."id", "public"."User"."email", "public"."User"."firstName", "public"."User"."lastName", "public"."User"."credits", "public"."User"."tier"::text, "public"."User"."createdAt", "public"."User"."updatedAt"
+prisma:query SELECT "public"."Analysis"."id", "public"."Analysis"."userId", "public"."Analysis"."url", "public"."Analysis"."videoId", "public"."Analysis"."title", "public"."Analysis"."thumbnail", "public"."Analysis"."viralScore", "public"."Analysis"."resultJson", "public"."Analysis"."createdAt" FROM "public"."Analysis" WHERE "public"."Analysis"."userId" = $1 ORDER BY "public"."Analysis"."createdAt" DESC LIMIT $2 OFFSET $3
+prisma:query SELECT COUNT(*) FROM (SELECT "public"."Analysis"."id" FROM "public"."Analysis" WHERE "public"."Analysis"."userId" = $1 OFFSET $2) AS "sub"
+prisma:query SELECT AVG("viralScore") FROM (SELECT "public"."Analysis"."viralScore" FROM "public"."Analysis" WHERE "public"."Analysis"."userId" = $1 OFFSET $2) AS "sub"
+ GET /dashboard 200 in 1170ms (compile: 7ms, render: 1163ms)
+prisma:query INSERT INTO "public"."User" ("id","email","firstName","lastName","credits","tier","createdAt","updatedAt") VALUES ($1,$2,$3,$4,$5,CAST($6::text AS "public"."Tier"),$7,$8) ON CONFLICT ("email") DO UPDATE SET "firstName" = $9, "lastName" = $10, "updatedAt" = $11 WHERE ("public"."User"."email" = $12 AND 1=1) RETURNING "public"."User"."id", "public"."User"."email", "public"."User"."firstName", "public"."User"."lastName", "public"."User"."credits", "public"."User"."tier"::text, "public"."User"."createdAt", "public"."User"."updatedAt"
+prisma:query SELECT "public"."Analysis"."id", "public"."Analysis"."userId", "public"."Analysis"."url", "public"."Analysis"."videoId", "public"."Analysis"."title", "public"."Analysis"."thumbnail", "public"."Analysis"."viralScore", "public"."Analysis"."resultJson", "public"."Analysis"."createdAt" FROM "public"."Analysis" WHERE "public"."Analysis"."userId" = $1 ORDER BY "public"."Analysis"."createdAt" DESC LIMIT $2 OFFSET $3
+prisma:query SELECT COUNT(*) FROM (SELECT "public"."Analysis"."id" FROM "public"."Analysis" WHERE "public"."Analysis"."userId" = $1 OFFSET $2) AS "sub"
+prisma:query SELECT AVG("viralScore") FROM (SELECT "public"."Analysis"."viralScore" FROM "public"."Analysis" WHERE "public"."Analysis"."userId" = $1 OFFSET $2) AS "sub"
+ GET /dashboard 200 in 1160ms (compile: 6ms, render: 1154ms)
+prisma:query INSERT INTO "public"."User" ("id","email","firstName","lastName","credits","tier","createdAt","updatedAt") VALUES ($1,$2,$3,$4,$5,CAST($6::text AS "public"."Tier"),$7,$8) ON CONFLICT ("email") DO UPDATE SET "firstName" = $9, "lastName" = $10, "updatedAt" = $11 WHERE ("public"."User"."email" = $12 AND 1=1) RETURNING "public"."User"."id", "public"."User"."email", "public"."User"."firstName", "public"."User"."lastName", "public"."User"."credits", "public"."User"."tier"::text, "public"."User"."createdAt", "public"."User"."updatedAt"
+prisma:query SELECT "public"."Analysis"."id", "public"."Analysis"."userId", "public"."Analysis"."url", "public"."Analysis"."videoId", "public"."Analysis"."title", "public"."Analysis"."thumbnail", "public"."Analysis"."viralScore", "public"."Analysis"."resultJson", "public"."Analysis"."createdAt" FROM "public"."Analysis" WHERE "public"."Analysis"."userId" = $1 ORDER BY "public"."Analysis"."createdAt" DESC LIMIT $2 OFFSET $3
+prisma:query SELECT COUNT(*) FROM (SELECT "public"."Analysis"."id" FROM "public"."Analysis" WHERE "public"."Analysis"."userId" = $1 OFFSET $2) AS "sub"
+prisma:query SELECT AVG("viralScore") FROM (SELECT "public"."Analysis"."viralScore" FROM "public"."Analysis" WHERE "public"."Analysis"."userId" = $1 OFFSET $2) AS "sub"
+ GET /dashboard 200 in 1075ms (compile: 12ms, render: 1063ms)
+prisma:query SELECT 1
+prisma:query INSERT INTO "public"."User" ("id","email","firstName","lastName","credits","tier","createdAt","updatedAt") VALUES ($1,$2,$3,$4,$5,CAST($6::text AS "public"."Tier"),$7,$8) ON CONFLICT ("email") DO UPDATE SET "firstName" = $9, "lastName" = $10, "updatedAt" = $11 WHERE ("public"."User"."email" = $12 AND 1=1) RETURNING "public"."User"."id", "public"."User"."email", "public"."User"."firstName", "public"."User"."lastName", "public"."User"."credits", "public"."User"."tier"::text, "public"."User"."createdAt", "public"."User"."updatedAt"
+prisma:query SELECT "public"."Analysis"."id", "public"."Analysis"."userId", "public"."Analysis"."url", "public"."Analysis"."videoId", "public"."Analysis"."title", "public"."Analysis"."thumbnail", "public"."Analysis"."viralScore", "public"."Analysis"."resultJson", "public"."Analysis"."createdAt" FROM "public"."Analysis" WHERE "public"."Analysis"."userId" = $1 ORDER BY "public"."Analysis"."createdAt" DESC LIMIT $2 OFFSET $3
+prisma:query SELECT COUNT(*) FROM (SELECT "public"."Analysis"."id" FROM "public"."Analysis" WHERE "public"."Analysis"."userId" = $1 OFFSET $2) AS "sub"
+prisma:query SELECT AVG("viralScore") FROM (SELECT "public"."Analysis"."viralScore" FROM "public"."Analysis" WHERE "public"."Analysis"."userId" = $1 OFFSET $2) AS "sub"
+ GET /dashboard 200 in 1253ms (compile: 13ms, render: 1239ms)

@@ -1,0 +1,12 @@
+{
+    "name": "viraledge-monorepo",
+    "private": true,
+    "scripts": {
+        "dev": "npm run dev --prefix frontend",
+        "build": "npm run build --prefix frontend",
+        "start": "concurrently \"cd backend && uvicorn main:app --reload --port 8000\" \"cd frontend && npm run dev\""
+    },
+    "dependencies": {
+        "concurrently": "^9.2.1"
+    }
+}

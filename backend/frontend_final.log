@@ -1,0 +1,293 @@
+
+> dev
+> npm run dev --prefix frontend
+
+
+> frontend@0.1.0 dev
+> next dev
+
+ ⚠ `eslint` configuration in next.config.ts is no longer supported. See more info here: https://nextjs.org/docs/app/api-reference/cli/next#next-lint-options
+ ⚠ Invalid next.config.ts options detected: 
+ ⚠     Unrecognized key(s) in object: 'eslint'
+ ⚠ See more info here: https://nextjs.org/docs/messages/invalid-next-config
+ ⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of /home/tdd/FIRST CLIENT/viraledge-backend/package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * /home/tdd/FIRST CLIENT/viraledge-backend/frontend/package-lock.json
+
+   ▲ Next.js 16.0.6 (Turbopack)
+   - Local:         http://localhost:3000
+   - Network:       http://192.168.1.20:3000
+   - Environments: .env
+
+ ✓ Starting...
+ ✓ Ready in 985ms
+ ○ Compiling /dashboard ...
+prisma:query INSERT INTO "public"."User" ("id","email","firstName","lastName","credits","tier","createdAt","updatedAt") VALUES ($1,$2,$3,$4,$5,CAST($6::text AS "public"."Tier"),$7,$8) ON CONFLICT ("email") DO UPDATE SET "firstName" = $9, "lastName" = $10, "updatedAt" = $11 WHERE ("public"."User"."email" = $12 AND 1=1) RETURNING "public"."User"."id", "public"."User"."email", "public"."User"."firstName", "public"."User"."lastName", "public"."User"."credits", "public"."User"."tier"::text, "public"."User"."createdAt", "public"."User"."updatedAt"
+prisma:query SELECT "public"."Analysis"."id", "public"."Analysis"."userId", "public"."Analysis"."url", "public"."Analysis"."videoId", "public"."Analysis"."title", "public"."Analysis"."thumbnail", "public"."Analysis"."viralScore", "public"."Analysis"."resultJson", "public"."Analysis"."createdAt" FROM "public"."Analysis" WHERE "public"."Analysis"."userId" = $1 ORDER BY "public"."Analysis"."createdAt" DESC LIMIT $2 OFFSET $3
+prisma:query SELECT COUNT(*) FROM (SELECT "public"."Analysis"."id" FROM "public"."Analysis" WHERE "public"."Analysis"."userId" = $1 OFFSET $2) AS "sub"
+prisma:query SELECT AVG("viralScore") FROM (SELECT "public"."Analysis"."viralScore" FROM "public"."Analysis" WHERE "public"."Analysis"."userId" = $1 OFFSET $2) AS "sub"
+ GET /dashboard 200 in 10.4s (compile: 5.2s, render: 5.2s)
+prisma:query INSERT INTO "public"."User" ("id","email","firstName","lastName","credits","tier","createdAt","updatedAt") VALUES ($1,$2,$3,$4,$5,CAST($6::text AS "public"."Tier"),$7,$8) ON CONFLICT ("email") DO UPDATE SET "firstName" = $9, "lastName" = $10, "updatedAt" = $11 WHERE ("public"."User"."email" = $12 AND 1=1) RETURNING "public"."User"."id", "public"."User"."email", "public"."User"."firstName", "public"."User"."lastName", "public"."User"."credits", "public"."User"."tier"::text, "public"."User"."createdAt", "public"."User"."updatedAt"
+prisma:query SELECT "public"."Analysis"."id", "public"."Analysis"."userId", "public"."Analysis"."url", "public"."Analysis"."videoId", "public"."Analysis"."title", "public"."Analysis"."thumbnail", "public"."Analysis"."viralScore", "public"."Analysis"."resultJson", "public"."Analysis"."createdAt" FROM "public"."Analysis" WHERE "public"."Analysis"."userId" = $1 ORDER BY "public"."Analysis"."createdAt" DESC LIMIT $2 OFFSET $3
+prisma:query SELECT COUNT(*) FROM (SELECT "public"."Analysis"."id" FROM "public"."Analysis" WHERE "public"."Analysis"."userId" = $1 OFFSET $2) AS "sub"
+prisma:query SELECT AVG("viralScore") FROM (SELECT "public"."Analysis"."viralScore" FROM "public"."Analysis" WHERE "public"."Analysis"."userId" = $1 OFFSET $2) AS "sub"
+ GET /dashboard 200 in 1025ms (compile: 12ms, render: 1014ms)
+prisma:query INSERT INTO "public"."User" ("id","email","firstName","lastName","credits","tier","createdAt","updatedAt") VALUES ($1,$2,$3,$4,$5,CAST($6::text AS "public"."Tier"),$7,$8) ON CONFLICT ("email") DO UPDATE SET "firstName" = $9, "lastName" = $10, "updatedAt" = $11 WHERE ("public"."User"."email" = $12 AND 1=1) RETURNING "public"."User"."id", "public"."User"."email", "public"."User"."firstName", "public"."User"."lastName", "public"."User"."credits", "public"."User"."tier"::text, "public"."User"."createdAt", "public"."User"."updatedAt"
+prisma:query SELECT "public"."Analysis"."id", "public"."Analysis"."userId", "public"."Analysis"."url", "public"."Analysis"."videoId", "public"."Analysis"."title", "public"."Analysis"."thumbnail", "public"."Analysis"."viralScore", "public"."Analysis"."resultJson", "public"."Analysis"."createdAt" FROM "public"."Analysis" WHERE "public"."Analysis"."userId" = $1 ORDER BY "public"."Analysis"."createdAt" DESC LIMIT $2 OFFSET $3
+prisma:query SELECT COUNT(*) FROM (SELECT "public"."Analysis"."id" FROM "public"."Analysis" WHERE "public"."Analysis"."userId" = $1 OFFSET $2) AS "sub"
+prisma:query SELECT AVG("viralScore") FROM (SELECT "public"."Analysis"."viralScore" FROM "public"."Analysis" WHERE "public"."Analysis"."userId" = $1 OFFSET $2) AS "sub"
+ GET /dashboard 200 in 942ms (compile: 6ms, render: 936ms)
+prisma:query SELECT 1
+prisma:query INSERT INTO "public"."User" ("id","email","firstName","lastName","credits","tier","createdAt","updatedAt") VALUES ($1,$2,$3,$4,$5,CAST($6::text AS "public"."Tier"),$7,$8) ON CONFLICT ("email") DO UPDATE SET "firstName" = $9, "lastName" = $10, "updatedAt" = $11 WHERE ("public"."User"."email" = $12 AND 1=1) RETURNING "public"."User"."id", "public"."User"."email", "public"."User"."firstName", "public"."User"."lastName", "public"."User"."credits", "public"."User"."tier"::text, "public"."User"."createdAt", "public"."User"."updatedAt"
+prisma:query SELECT "public"."Analysis"."id", "public"."Analysis"."userId", "public"."Analysis"."url", "public"."Analysis"."videoId", "public"."Analysis"."title", "public"."Analysis"."thumbnail", "public"."Analysis"."viralScore", "public"."Analysis"."resultJson", "public"."Analysis"."createdAt" FROM "public"."Analysis" WHERE "public"."Analysis"."userId" = $1 ORDER BY "public"."Analysis"."createdAt" DESC LIMIT $2 OFFSET $3
+prisma:query SELECT COUNT(*) FROM (SELECT "public"."Analysis"."id" FROM "public"."Analysis" WHERE "public"."Analysis"."userId" = $1 OFFSET $2) AS "sub"
+prisma:query SELECT AVG("viralScore") FROM (SELECT "public"."Analysis"."viralScore" FROM "public"."Analysis" WHERE "public"."Analysis"."userId" = $1 OFFSET $2) AS "sub"
+ GET /dashboard 200 in 1336ms (compile: 8ms, render: 1327ms)
+ POST /api/analyze 200 in 1181ms (compile: 713ms, render: 468ms)
+Error: aborted
+    at ignore-listed frames {
+  code: 'ECONNRESET'
+}
+prisma:query SELECT 1
+prisma:query SELECT "public"."User"."id", "public"."User"."email", "public"."User"."firstName", "public"."User"."lastName", "public"."User"."credits", "public"."User"."tier"::text, "public"."User"."createdAt", "public"."User"."updatedAt" FROM "public"."User" WHERE ("public"."User"."id" = $1 AND 1=1) LIMIT $2 OFFSET $3
+prisma:query INSERT INTO "public"."User" ("id","email","credits","tier","createdAt","updatedAt") VALUES ($1,$2,$3,CAST($4::text AS "public"."Tier"),$5,$6) RETURNING "public"."User"."id", "public"."User"."email", "public"."User"."firstName", "public"."User"."lastName", "public"."User"."credits", "public"."User"."tier"::text, "public"."User"."createdAt", "public"."User"."updatedAt"
+Error [PrismaClientKnownRequestError]: 
+Invalid `__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["prisma"].user.create()` invocation in
+/home/tdd/FIRST CLIENT/viraledge-backend/frontend/.next/dev/server/chunks/[root-of-the-server]__02dff790._.js:112:168
+
+  109     }
+  110 });
+  111 if (!user) {
+→ 112     user = await __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["prisma"].user.create(
+Unique constraint failed on the fields: (`email`)
+    at <unknown> (src/app/api/analyze/route.ts:19:34)
+    at async POST (src/app/api/analyze/route.ts:19:16)
+  17 |     let user = await prisma.user.findUnique({ where: { id: kindeUser.id } });
+  18 |     if (!user) {
+> 19 |         user = await prisma.user.create({
+     |                                  ^
+  20 |             data: { id: kindeUser.id, email: kindeUser.email!, credits: 3 }
+  21 |         });
+  22 |     } {
+  code: 'P2002',
+  clientVersion: '5.22.0',
+  meta: [Object]
+}
+ POST /api/analyze 500 in 1906ms (compile: 4ms, render: 1901ms)
+prisma:query SELECT "public"."User"."id", "public"."User"."email", "public"."User"."firstName", "public"."User"."lastName", "public"."User"."credits", "public"."User"."tier"::text, "public"."User"."createdAt", "public"."User"."updatedAt" FROM "public"."User" WHERE ("public"."User"."id" = $1 AND 1=1) LIMIT $2 OFFSET $3
+prisma:query INSERT INTO "public"."User" ("id","email","credits","tier","createdAt","updatedAt") VALUES ($1,$2,$3,CAST($4::text AS "public"."Tier"),$5,$6) RETURNING "public"."User"."id", "public"."User"."email", "public"."User"."firstName", "public"."User"."lastName", "public"."User"."credits", "public"."User"."tier"::text, "public"."User"."createdAt", "public"."User"."updatedAt"
+Error [PrismaClientKnownRequestError]: 
+Invalid `__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["prisma"].user.create()` invocation in
+/home/tdd/FIRST CLIENT/viraledge-backend/frontend/.next/dev/server/chunks/[root-of-the-server]__02dff790._.js:112:168
+
+  109     }
+  110 });
+  111 if (!user) {
+→ 112     user = await __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["prisma"].user.create(
+Unique constraint failed on the fields: (`email`)
+    at <unknown> (src/app/api/analyze/route.ts:19:34)
+    at async POST (src/app/api/analyze/route.ts:19:16)
+  17 |     let user = await prisma.user.findUnique({ where: { id: kindeUser.id } });
+  18 |     if (!user) {
+> 19 |         user = await prisma.user.create({
+     |                                  ^
+  20 |             data: { id: kindeUser.id, email: kindeUser.email!, credits: 3 }
+  21 |         });
+  22 |     } {
+  code: 'P2002',
+  clientVersion: '5.22.0',
+  meta: [Object]
+}
+ POST /api/analyze 500 in 2.6s (compile: 5ms, render: 2.6s)
+prisma:query SELECT 1
+prisma:query INSERT INTO "public"."User" ("id","email","firstName","lastName","credits","tier","createdAt","updatedAt") VALUES ($1,$2,$3,$4,$5,CAST($6::text AS "public"."Tier"),$7,$8) ON CONFLICT ("email") DO UPDATE SET "firstName" = $9, "lastName" = $10, "updatedAt" = $11 WHERE ("public"."User"."email" = $12 AND 1=1) RETURNING "public"."User"."id", "public"."User"."email", "public"."User"."firstName", "public"."User"."lastName", "public"."User"."credits", "public"."User"."tier"::text, "public"."User"."createdAt", "public"."User"."updatedAt"
+prisma:query SELECT "public"."Analysis"."id", "public"."Analysis"."userId", "public"."Analysis"."url", "public"."Analysis"."videoId", "public"."Analysis"."title", "public"."Analysis"."thumbnail", "public"."Analysis"."viralScore", "public"."Analysis"."resultJson", "public"."Analysis"."createdAt" FROM "public"."Analysis" WHERE "public"."Analysis"."userId" = $1 ORDER BY "public"."Analysis"."createdAt" DESC LIMIT $2 OFFSET $3
+prisma:query SELECT COUNT(*) FROM (SELECT "public"."Analysis"."id" FROM "public"."Analysis" WHERE "public"."Analysis"."userId" = $1 OFFSET $2) AS "sub"
+prisma:query SELECT AVG("viralScore") FROM (SELECT "public"."Analysis"."viralScore" FROM "public"."Analysis" WHERE "public"."Analysis"."userId" = $1 OFFSET $2) AS "sub"
+ GET /dashboard/history 200 in 1537ms (compile: 1031ms, render: 506ms)
+ GET /dashboard 200 in 3.4s (compile: 6ms, render: 3.4s)
+prisma:query SELECT "public"."Analysis"."id", "public"."Analysis"."userId", "public"."Analysis"."url", "public"."Analysis"."videoId", "public"."Analysis"."title", "public"."Analysis"."thumbnail", "public"."Analysis"."viralScore", "public"."Analysis"."resultJson", "public"."Analysis"."createdAt" FROM "public"."Analysis" WHERE "public"."Analysis"."userId" = $1 ORDER BY "public"."Analysis"."createdAt" DESC OFFSET $2
+ GET /dashboard/history 200 in 937ms (compile: 6ms, render: 931ms)
+prisma:query SELECT "public"."Analysis"."id", "public"."Analysis"."userId", "public"."Analysis"."url", "public"."Analysis"."videoId", "public"."Analysis"."title", "public"."Analysis"."thumbnail", "public"."Analysis"."viralScore", "public"."Analysis"."resultJson", "public"."Analysis"."createdAt" FROM "public"."Analysis" WHERE "public"."Analysis"."userId" = $1 ORDER BY "public"."Analysis"."createdAt" DESC OFFSET $2
+prisma:query INSERT INTO "public"."User" ("id","email","firstName","lastName","credits","tier","createdAt","updatedAt") VALUES ($1,$2,$3,$4,$5,CAST($6::text AS "public"."Tier"),$7,$8) ON CONFLICT ("email") DO UPDATE SET "firstName" = $9, "lastName" = $10, "updatedAt" = $11 WHERE ("public"."User"."email" = $12 AND 1=1) RETURNING "public"."User"."id", "public"."User"."email", "public"."User"."firstName", "public"."User"."lastName", "public"."User"."credits", "public"."User"."tier"::text, "public"."User"."createdAt", "public"."User"."updatedAt"
+prisma:query SELECT "public"."Analysis"."id", "public"."Analysis"."userId", "public"."Analysis"."url", "public"."Analysis"."videoId", "public"."Analysis"."title", "public"."Analysis"."thumbnail", "public"."Analysis"."viralScore", "public"."Analysis"."resultJson", "public"."Analysis"."createdAt" FROM "public"."Analysis" WHERE "public"."Analysis"."userId" = $1 ORDER BY "public"."Analysis"."createdAt" DESC LIMIT $2 OFFSET $3
+prisma:query SELECT COUNT(*) FROM (SELECT "public"."Analysis"."id" FROM "public"."Analysis" WHERE "public"."Analysis"."userId" = $1 OFFSET $2) AS "sub"
+prisma:query SELECT AVG("viralScore") FROM (SELECT "public"."Analysis"."viralScore" FROM "public"."Analysis" WHERE "public"."Analysis"."userId" = $1 OFFSET $2) AS "sub"
+ GET /dashboard 200 in 2.2s (compile: 5ms, render: 2.2s)
+prisma:query INSERT INTO "public"."User" ("id","email","firstName","lastName","credits","tier","createdAt","updatedAt") VALUES ($1,$2,$3,$4,$5,CAST($6::text AS "public"."Tier"),$7,$8) ON CONFLICT ("email") DO UPDATE SET "firstName" = $9, "lastName" = $10, "updatedAt" = $11 WHERE ("public"."User"."email" = $12 AND 1=1) RETURNING "public"."User"."id", "public"."User"."email", "public"."User"."firstName", "public"."User"."lastName", "public"."User"."credits", "public"."User"."tier"::text, "public"."User"."createdAt", "public"."User"."updatedAt"
+prisma:query SELECT "public"."Analysis"."id", "public"."Analysis"."userId", "public"."Analysis"."url", "public"."Analysis"."videoId", "public"."Analysis"."title", "public"."Analysis"."thumbnail", "public"."Analysis"."viralScore", "public"."Analysis"."resultJson", "public"."Analysis"."createdAt" FROM "public"."Analysis" WHERE "public"."Analysis"."userId" = $1 ORDER BY "public"."Analysis"."createdAt" DESC LIMIT $2 OFFSET $3
+prisma:query SELECT COUNT(*) FROM (SELECT "public"."Analysis"."id" FROM "public"."Analysis" WHERE "public"."Analysis"."userId" = $1 OFFSET $2) AS "sub"
+prisma:query SELECT AVG("viralScore") FROM (SELECT "public"."Analysis"."viralScore" FROM "public"."Analysis" WHERE "public"."Analysis"."userId" = $1 OFFSET $2) AS "sub"
+ GET /dashboard 200 in 1017ms (compile: 4ms, render: 1013ms)
+prisma:query SELECT "public"."User"."id", "public"."User"."email", "public"."User"."firstName", "public"."User"."lastName", "public"."User"."credits", "public"."User"."tier"::text, "public"."User"."createdAt", "public"."User"."updatedAt" FROM "public"."User" WHERE ("public"."User"."id" = $1 AND 1=1) LIMIT $2 OFFSET $3
+prisma:query INSERT INTO "public"."User" ("id","email","credits","tier","createdAt","updatedAt") VALUES ($1,$2,$3,CAST($4::text AS "public"."Tier"),$5,$6) RETURNING "public"."User"."id", "public"."User"."email", "public"."User"."firstName", "public"."User"."lastName", "public"."User"."credits", "public"."User"."tier"::text, "public"."User"."createdAt", "public"."User"."updatedAt"
+Error [PrismaClientKnownRequestError]: 
+Invalid `__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["prisma"].user.create()` invocation in
+/home/tdd/FIRST CLIENT/viraledge-backend/frontend/.next/dev/server/chunks/[root-of-the-server]__02dff790._.js:112:168
+
+  109     }
+  110 });
+  111 if (!user) {
+→ 112     user = await __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["prisma"].user.create(
+Unique constraint failed on the fields: (`email`)
+    at <unknown> (src/app/api/analyze/route.ts:19:34)
+    at async POST (src/app/api/analyze/route.ts:19:16)
+  17 |     let user = await prisma.user.findUnique({ where: { id: kindeUser.id } });
+  18 |     if (!user) {
+> 19 |         user = await prisma.user.create({
+     |                                  ^
+  20 |             data: { id: kindeUser.id, email: kindeUser.email!, credits: 3 }
+  21 |         });
+  22 |     } {
+  code: 'P2002',
+  clientVersion: '5.22.0',
+  meta: [Object]
+}
+ POST /api/analyze 500 in 918ms (compile: 3ms, render: 915ms)
+ ⨯ Error [PageNotFoundError]: Cannot find module for page: route not found /dashboard/page
+    at ignore-listed frames {
+  code: 'ENOENT'
+}
+ GET /dashboard 500 in 729ms (compile: 646ms, render: 83ms)
+ ⨯ Error [PageNotFoundError]: Cannot find module for page: route not found /dashboard/page
+    at ignore-listed frames {
+  code: 'ENOENT'
+}
+ GET /dashboard 500 in 16ms (compile: 8ms, render: 7ms)
+ ⨯ Error [PageNotFoundError]: Cannot find module for page: route not found /dashboard/page
+    at ignore-listed frames {
+  code: 'ENOENT'
+}
+ GET /dashboard 500 in 13ms (compile: 6ms, render: 7ms)
+ ⨯ Error [PageNotFoundError]: Cannot find module for page: route not found /dashboard/page
+    at ignore-listed frames {
+  code: 'ENOENT'
+}
+ GET /dashboard 500 in 14ms (compile: 6ms, render: 7ms)
+ ⨯ Error [PageNotFoundError]: Cannot find module for page: route not found /dashboard/page
+    at ignore-listed frames {
+  code: 'ENOENT'
+}
+ GET /dashboard 500 in 14ms (compile: 7ms, render: 8ms)
+ ⨯ Error [PageNotFoundError]: Cannot find module for page: route not found /dashboard/page
+    at ignore-listed frames {
+  code: 'ENOENT'
+}
+ GET /dashboard 500 in 15ms (compile: 9ms, render: 6ms)
+ ⨯ Error [PageNotFoundError]: Cannot find module for page: route not found /dashboard/page
+    at ignore-listed frames {
+  code: 'ENOENT'
+}
+ GET /dashboard 500 in 11ms (compile: 6ms, render: 5ms)
+ ⨯ Error [PageNotFoundError]: Cannot find module for page: route not found /dashboard/page
+    at ignore-listed frames {
+  code: 'ENOENT'
+}
+ GET /dashboard 500 in 12ms (compile: 5ms, render: 6ms)
+ ⨯ Error [PageNotFoundError]: Cannot find module for page: route not found /dashboard/page
+    at ignore-listed frames {
+  code: 'ENOENT'
+}
+ GET /dashboard 500 in 15ms (compile: 7ms, render: 7ms)
+ ⨯ Error [PageNotFoundError]: Cannot find module for page: route not found /dashboard/page
+    at ignore-listed frames {
+  code: 'ENOENT'
+}
+ GET /dashboard 500 in 12ms (compile: 6ms, render: 6ms)
+ ⨯ Error [PageNotFoundError]: Cannot find module for page: route not found /dashboard/page
+    at ignore-listed frames {
+  code: 'ENOENT'
+}
+ GET /dashboard 500 in 17ms (compile: 8ms, render: 8ms)
+ ⨯ Error [PageNotFoundError]: Cannot find module for page: route not found /dashboard/page
+    at ignore-listed frames {
+  code: 'ENOENT'
+}
+ GET /dashboard 500 in 11ms (compile: 6ms, render: 5ms)
+ ⨯ Error [PageNotFoundError]: Cannot find module for page: route not found /dashboard/page
+    at ignore-listed frames {
+  code: 'ENOENT'
+}
+ GET /dashboard 500 in 11ms (compile: 6ms, render: 5ms)
+ ⨯ Error [PageNotFoundError]: Cannot find module for page: route not found /dashboard/page
+    at ignore-listed frames {
+  code: 'ENOENT'
+}
+ GET /dashboard 500 in 12ms (compile: 6ms, render: 6ms)
+ ⨯ Error [PageNotFoundError]: Cannot find module for page: route not found /dashboard/page
+    at ignore-listed frames {
+  code: 'ENOENT'
+}
+ GET /dashboard 500 in 19ms (compile: 5ms, render: 14ms)
+ ⨯ Error [PageNotFoundError]: Cannot find module for page: route not found /dashboard/page
+    at ignore-listed frames {
+  code: 'ENOENT'
+}
+ GET /dashboard 500 in 19ms (compile: 10ms, render: 9ms)
+ ⨯ Error [PageNotFoundError]: Cannot find module for page: route not found /dashboard/page
+    at ignore-listed frames {
+  code: 'ENOENT'
+}
+ GET /dashboard 500 in 20ms (compile: 11ms, render: 10ms)
+ ⨯ Error [PageNotFoundError]: Cannot find module for page: route not found /dashboard/page
+    at ignore-listed frames {
+  code: 'ENOENT'
+}
+ GET /dashboard 500 in 21ms (compile: 9ms, render: 12ms)
+ ⨯ Error [PageNotFoundError]: Cannot find module for page: route not found /dashboard/page
+    at ignore-listed frames {
+  code: 'ENOENT'
+}
+ GET /dashboard 500 in 15ms (compile: 10ms, render: 5ms)
+ ⨯ Error [PageNotFoundError]: Cannot find module for page: route not found /dashboard/page
+    at ignore-listed frames {
+  code: 'ENOENT'
+}
+ GET /dashboard 500 in 11ms (compile: 6ms, render: 6ms)
+ ⨯ Error [PageNotFoundError]: Cannot find module for page: route not found /dashboard/page
+    at ignore-listed frames {
+  code: 'ENOENT'
+}
+ GET /dashboard 500 in 13ms (compile: 6ms, render: 7ms)
+ ⨯ Error [PageNotFoundError]: Cannot find module for page: route not found /dashboard/page
+    at ignore-listed frames {
+  code: 'ENOENT'
+}
+ GET /dashboard 500 in 18ms (compile: 8ms, render: 10ms)
+ ⨯ Error [PageNotFoundError]: Cannot find module for page: route not found /dashboard/page
+    at ignore-listed frames {
+  code: 'ENOENT'
+}
+ GET /dashboard 500 in 17ms (compile: 11ms, render: 7ms)
+ ⨯ Error [PageNotFoundError]: Cannot find module for page: route not found /dashboard/page
+    at ignore-listed frames {
+  code: 'ENOENT'
+}
+ ⨯ Error [PageNotFoundError]: Cannot find module for page: route not found /dashboard/page
+    at ignore-listed frames {
+  code: 'ENOENT'
+}
+ GET /dashboard 500 in 28ms (compile: 20ms, render: 8ms)
+ GET /dashboard 500 in 26ms (compile: 19ms, render: 7ms)
+ ⨯ Error [PageNotFoundError]: Cannot find module for page: route not found /dashboard/page
+    at ignore-listed frames {
+  code: 'ENOENT'
+}
+ GET /dashboard 500 in 18ms (compile: 8ms, render: 10ms)
+ ⨯ Error [PageNotFoundError]: Cannot find module for page: route not found /dashboard/page
+    at ignore-listed frames {
+  code: 'ENOENT'
+}
+ ⨯ Error [PageNotFoundError]: Cannot find module for page: route not found /dashboard/page
+    at ignore-listed frames {
+  code: 'ENOENT'
+}
+ GET /dashboard 500 in 23ms (compile: 17ms, render: 6ms)
+ ⨯ Error [PageNotFoundError]: Cannot find module for page: route not found /dashboard/page
+    at ignore-listed frames {
+  code: 'ENOENT'
+}
+ GET /dashboard 500 in 24ms (compile: 9ms, render: 14ms)

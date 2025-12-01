@@ -1,0 +1,158 @@
+nohup: ignoring input
+INFO:     Will watch for changes in these directories: ['/home/tdd/FIRST CLIENT/viraledge-backend/backend']
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [17247] using WatchFiles
+INFO:     Started server process [17320]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     127.0.0.1:46112 - "POST /m3/analyze HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/home/tdd/.local/lib/python3.13/site-packages/nltk/corpus/util.py", line 84, in __load
+    root = nltk.data.find(f"{self.subdir}/{zip_name}")
+  File "/home/tdd/.local/lib/python3.13/site-packages/nltk/data.py", line 579, in find
+    raise LookupError(resource_not_found)
+LookupError: 
+**********************************************************************
+  Resource [93mbrown[0m not found.
+  Please use the NLTK Downloader to obtain the resource:
+
+  [31m>>> import nltk
+  >>> nltk.download('brown')
+  [0m
+  For more information see: https://www.nltk.org/data.html
+
+  Attempted to load [93mcorpora/brown.zip/brown/[0m
+
+  Searched in:
+    - '/home/tdd/nltk_data'
+    - '/usr/nltk_data'
+    - '/usr/share/nltk_data'
+    - '/usr/lib/nltk_data'
+    - '/usr/share/nltk_data'
+    - '/usr/local/share/nltk_data'
+    - '/usr/lib/nltk_data'
+    - '/usr/local/lib/nltk_data'
+**********************************************************************
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/tdd/.local/lib/python3.13/site-packages/textblob/decorators.py", line 35, in decorated
+    return func(*args, **kwargs)
+  File "/home/tdd/.local/lib/python3.13/site-packages/textblob/en/np_extractors.py", line 113, in train
+    train_data = nltk.corpus.brown.tagged_sents(categories="news")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tdd/.local/lib/python3.13/site-packages/nltk/corpus/util.py", line 120, in __getattr__
+    self.__load()
+    ~~~~~~~~~~~^^
+  File "/home/tdd/.local/lib/python3.13/site-packages/nltk/corpus/util.py", line 86, in __load
+    raise e
+  File "/home/tdd/.local/lib/python3.13/site-packages/nltk/corpus/util.py", line 81, in __load
+    root = nltk.data.find(f"{self.subdir}/{self.__name}")
+  File "/home/tdd/.local/lib/python3.13/site-packages/nltk/data.py", line 579, in find
+    raise LookupError(resource_not_found)
+LookupError: 
+**********************************************************************
+  Resource [93mbrown[0m not found.
+  Please use the NLTK Downloader to obtain the resource:
+
+  [31m>>> import nltk
+  >>> nltk.download('brown')
+  [0m
+  For more information see: https://www.nltk.org/data.html
+
+  Attempted to load [93mcorpora/brown[0m
+
+  Searched in:
+    - '/home/tdd/nltk_data'
+    - '/usr/nltk_data'
+    - '/usr/share/nltk_data'
+    - '/usr/lib/nltk_data'
+    - '/usr/share/nltk_data'
+    - '/usr/local/share/nltk_data'
+    - '/usr/lib/nltk_data'
+    - '/usr/local/lib/nltk_data'
+**********************************************************************
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/tdd/.local/lib/python3.13/site-packages/uvicorn/protocols/http/httptools_impl.py", line 401, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self.scope, self.receive, self.send
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/tdd/.local/lib/python3.13/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tdd/.local/lib/python3.13/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/home/tdd/.local/lib/python3.13/site-packages/starlette/applications.py", line 113, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/tdd/.local/lib/python3.13/site-packages/starlette/middleware/errors.py", line 187, in __call__
+    raise exc
+  File "/home/tdd/.local/lib/python3.13/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/home/tdd/.local/lib/python3.13/site-packages/starlette/middleware/cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "/home/tdd/.local/lib/python3.13/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/home/tdd/.local/lib/python3.13/site-packages/starlette/_exception_handler.py", line 62, in wrapped_app
+    raise exc
+  File "/home/tdd/.local/lib/python3.13/site-packages/starlette/_exception_handler.py", line 51, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/tdd/.local/lib/python3.13/site-packages/starlette/routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/tdd/.local/lib/python3.13/site-packages/starlette/routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "/home/tdd/.local/lib/python3.13/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/home/tdd/.local/lib/python3.13/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/home/tdd/.local/lib/python3.13/site-packages/starlette/_exception_handler.py", line 62, in wrapped_app
+    raise exc
+  File "/home/tdd/.local/lib/python3.13/site-packages/starlette/_exception_handler.py", line 51, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/tdd/.local/lib/python3.13/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/tdd/.local/lib/python3.13/site-packages/fastapi/routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/home/tdd/.local/lib/python3.13/site-packages/fastapi/routing.py", line 212, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tdd/FIRST CLIENT/viraledge-backend/backend/app/main.py", line 46, in analyze_content
+    topics = extract_topics(combined_text)
+  File "/home/tdd/FIRST CLIENT/viraledge-backend/backend/app/nlp/topics.py", line 10, in extract_topics
+    phrases = blob.noun_phrases
+              ^^^^^^^^^^^^^^^^^
+  File "/home/tdd/.local/lib/python3.13/site-packages/textblob/decorators.py", line 23, in __get__
+    value = obj.__dict__[self.func.__name__] = self.func(obj)
+                                               ~~~~~~~~~^^^^^
+  File "/home/tdd/.local/lib/python3.13/site-packages/textblob/blob.py", line 477, in noun_phrases
+    for phrase in self.np_extractor.extract(self.raw)
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/home/tdd/.local/lib/python3.13/site-packages/textblob/en/np_extractors.py", line 143, in extract
+    self.train()
+    ~~~~~~~~~~^^
+  File "/home/tdd/.local/lib/python3.13/site-packages/textblob/decorators.py", line 37, in decorated
+    raise MissingCorpusError() from error
+textblob.exceptions.MissingCorpusError: 
+Looks like you are missing some required data for this feature.
+
+To download the necessary data, simply run
+
+    python -m textblob.download_corpora
+
+or use the NLTK downloader to download the missing data: http://nltk.org/data.html
+If this doesn't fix the problem, file an issue at https://github.com/sloria/TextBlob/issues.
+

@@ -1,53 +1,39 @@
-.env
+# Dependencies
+node_modules
+.pnp
+.pnp.js
+venv/
 env/
-# Python cache
 __pycache__/
 *.py[cod]
-# Distribute / packaging
-build/
-dist/
-*.egg-info/
-# virtualenv
-venv/
-.venv/
-# tooling
-.pytest_cache/
-.mypy_cache/
-# Editor directories
-.vscode/
-.idea/
-# OS files
+
+# Testing
+coverage
+.nyc_output
+
+# Production
+build
+dist
+
+# Misc
 .DS_Store
-# dotenv
-.env.local
-.env.*__pycache__/
-*.py[cod]
-*$py.class
-
-# Distribution / packaging
-build/
-dist/
-*.egg-info/
-
-# Virtual environments
-.venv/
-venv/
-env/
-
-# Environment variables
 .env
-.env.*
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-# Pytest
-.pytest_cache/
+# Next.js
+.next/
+out/
 
-# IDEs and editors
-.vscode/
-.idea/
-*.swp
+# Vercel
+.vercel
 
-# System files
-.DS_Store
-
-# Logs
+# Project specific
+backend_errors.log
 *.log
+_backup_env_2025/
